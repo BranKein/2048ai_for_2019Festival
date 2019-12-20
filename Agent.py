@@ -20,9 +20,10 @@ score: 합산한 타일 수의 총합 ex) 2, 2 합쳐 4를 만들면 score += 4
 import random, numpy, math, pickle, keras
 #
 import keras.callbacks
-from keras.models import load_model
-from keras.layers import *
-from keras.optimizers import *
+from keras.models import Sequential, load_model
+from keras.layers.core import Dense, Dropout, Activaton, Flatten
+from keras.optimizers import RMSprop
+from keras.layers import Conv2D, MaxPooling2D
 import numpy as np
 import Agent_constants as ac
 
@@ -43,35 +44,30 @@ class Brain:
         def __init__(self, NbrStates, NbrActions):
                 self.NbrStates = NbrStates
                 self.NbrActions = NbrActions
+                self.num_inputs = 16
+                self.num_hiddens1 = 512
+                self.num_hiddens2 = 4096
+                self.num_output = 1
+                self.lr = 0.01
 
                 self.model = self._createModel()
-                self.tbCallBack = keras.callbacks.TensorBoard(log_dir='./logs', histogram_freq=0, batch_size=ac.P_BATCH_SIZE, write_graph=True, write_grads=False, write_images=False, embeddings_freq=0, embeddings_layer_names=None, embeddings_metadata=None, embeddings_data=None)
-                # TensorBoard 사용 코드
 
         def _createModel(self):
-                model = keras.models.Sequential() #계층을 선형으로 쌓은 것
+                model = Sequential()
+                model.add(Conv2D(512, kernel_size=(2, 2),
+                         activation='relu',
+                         input_shape=input_shape))
+                model.add(Conv2D(self.num_hiddens1, (2, 2), activation='relu'))
 
-                # Simple Model with Three Hidden Layers and a Linear Output Layer. The Input layer is simply the State input.
-                # model.add(Conv1D(filters = 32, kernel_size = 3, strides = 1))
-                # 모델 계츨 쌓음
-                model.add(Dense(units=32, activation='relu', input_dim=self.NbrStates))
-                model.add(Dense(units=32, activation='relu')) #Hidden layer
-                # model.add(Dense(units=32, activation='relu'))
-                model.add(Dense(units=self.NbrActions, activation='linear'))                            # Linear Output Layer as we are estimating a Function Q[S,A]
-                model.summary()
-                '''
-                model.add(Dense(units=64, activation='relu', input_dim=self.NbrStates, kernel_initializer='he_uniform'))
-                1. 입력이 상태, 출력이 큐함수이므로 input_dim에 상태의 크기가 들어가고 마지막 model.add(Dense())를 더할 때 크기를 행동의 크기로 설정
-                2. kernel_initalizer: 인공신경망의 각 가중치의 초깃값을 어떻게 설정하는지 중요
-                3. model.summary(): 케라스에서는 모델의 정보를 정리해 실행 창에 보여주는 함수 제공
-                '''
-                # 학습 과정 구성
-                model.compile(loss='mse', optimizer=keras.optimizers.Adam(lr=ac.LEARNING_RATE))     # use adam as an alternative optimsiuer as per comment
-                #loss function: mse
-                # optimizer: 최적화기
+                model.add(Flatten())
+                model.add(Dense(self.num_output, init='lecun_uniform'))
+
+                model.add(Activation('linear'))
+                #print(model.output_shape)
+                rms = RMSprop(lr=self.lr)
+                model.compile(loss='mse', optimizer=rms)
+
                 return model
-        def train(self, x, y, epoch=1, verbose=0):
-                self.model.fit(x, y, batch_size=ac.BATCH_SIZE, epochs=epoch, verbose=verbose, initial_epoch = epoch-1)#, callbacks = [self.tbCallBack],validation_split = 0.2)
 
         # epoch: 주어진 배치를 학습에 몇 번 사용할 것인가를 나타내는 변수, 강화학습에서는 1로 설정
 
@@ -79,7 +75,9 @@ class Brain:
         # x: numpy array of training data or list of arrays
         # y: numpy array of target(label) data or list of arrays
         def predict(self, s): #예측
-                return self.model.predict(s)
+                pre = self.model.predict(s)
+                print(pre)
+                return pre
 
         def predictOne(self, s):
                 return self.predict(s.reshape(1, self.NbrStates)).flatten()
@@ -120,15 +118,7 @@ class Agent:
         # ============================================
         # 학습 모델 로드
         def Load(self, num):
-                self.brain.model = keras.models.load_model("./model_power/2048_Model{}.h5".format(num))
-                with open("./model_power/2048_Model{}_steps.txt".format(num),"r") as f:
-                        self.steps = int(f.read())
-                        print(self.steps)
-
-
-                with open("./model/2048_Model{}_exp.txt".format(num),"rb") as f:
-                        self.ExpReplay.samples = pickle.load(f)
-
+                self.brain.model = keras.models.load_model("./bestnnresult/new_c_4.h5")
                         
                 if self.steps < ac.OBSERVEPERIOD:
                     self.epsilon = 1.0
