@@ -121,6 +121,8 @@ def reverse(mat):
 
 
 def transpose(mat):
+    print("transpose")
+    print(mat)
     new = []
     for i in range(len(mat[0])):
         new.append([])
@@ -143,6 +145,8 @@ def transpose(mat):
 
 
 def cover_up(mat):
+    print("cover_up")
+    print(mat)
     new = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
     done = False
     for i in range(4):
@@ -171,13 +175,12 @@ def merge(mat):
 
 def up(game):
     print("up")
+    print(game)
     # return matrix after shifting up
     game = transpose(game)
     game, done = cover_up(game)
-    temp, score = merge(game)
-    game = temp[0]
-    done = done or temp[1]
-    game = cover_up(game)[0]
+    game, score, done = merge(game)
+    game, done= cover_up(game)
     game = transpose(game)
     return (game, score, done)
 
@@ -186,10 +189,8 @@ def down(game):
     print("down")
     game = reverse(transpose(game))
     game, done = cover_up(game)
-    temp, score = merge(game)
-    game = temp[0]
-    done = done or temp[1]
-    game = cover_up(game)[0]
+    game, score, done = merge(game)
+    game, done = cover_up(game)
     game = transpose(reverse(game))
     return (game, score, done)
 
@@ -198,10 +199,8 @@ def left(game):
     print("left")
     # return matrix after shifting left
     game, done = cover_up(game)
-    temp, score = merge(game)
-    game = temp[0]
-    done = done or temp[1]
-    game = cover_up(game)[0]
+    game, score, done = merge(game)
+    game, done = cover_up(game)
     return (game, score, done)
 
 
@@ -210,9 +209,7 @@ def right(game):
     # return matrix after shifting right
     game = reverse(game)
     game, done = cover_up(game)
-    temp ,score = merge(game)
-    game = temp[0]
-    done = done or temp[1]
-    game = cover_up(game)[0]
+    game ,score, done = merge(game)
+    game, done = cover_up(game)
     game = reverse(game)
     return (game, score, done)

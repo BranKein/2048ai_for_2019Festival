@@ -33,15 +33,15 @@ class puzzle(Frame):
 
     def init_grid(self):
         background = Frame(self, bg=c.BACKGROUND_COLOR_GAME,
-                           width=c.SIZE, height=c.SIZE)
+                           width=400, height=400)
         background.grid()
 
-        for i in range(c.GRID_LEN):
+        for i in range(4):
             grid_row = []
-            for j in range(c.GRID_LEN):
+            for j in range(4):
                 cell = Frame(background, bg=c.BACKGROUND_COLOR_CELL_EMPTY,
-                             width=c.SIZE / c.GRID_LEN,
-                             height=c.SIZE / c.GRID_LEN)
+                             width=100,
+                             height=100)
                 cell.grid(row=i, column=j, padx=c.GRID_PADDING,
                           pady=c.GRID_PADDING)
                 t = Label(master=cell, text="",
@@ -75,13 +75,13 @@ class puzzle(Frame):
         self.update_idletasks()
 
     def key_down(self, action):
-        '''
-        key = repr(event.char)
+        
+        key = repr(action.char)
         if key == c.KEY_BACK and len(self.history_matrixs) > 1:
             self.matrix = self.history_matrixs.pop()
             self.update_grid_cells()
             print('back on step total step:', len(self.history_matrixs))
-        '''
+        
         
         self.matrix, self.plusscore, done = self.commands[action](self.matrix)
         self.score = self.score + self.plusscore
