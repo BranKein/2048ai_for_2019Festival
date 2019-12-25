@@ -6,6 +6,11 @@ import numpy as np
 import logic
 import constants as c
 
+ErrorMat = [[[16, 16, 16, 16], [8, 8, 8, 8], [4, 4, 4, 4], [2, 2, 2, 2]],
+            [[16, 8, 4, 2], [16, 8, 4, 2], [16, 8, 4, 2], [16, 8, 4, 2]],
+            [[2, 4, 8, 16], [2, 4, 8, 16], [2, 4, 8, 16], [2, 4, 8, 16]],
+            [[2, 2, 2, 2], [4, 4, 4, 4], [8, 8, 8, 8], [16, 16, 16, 16]]]
+
 
 class puzzle():
     def __init__(self):
@@ -75,7 +80,7 @@ class puzzle():
     def init_grid_score(self):
         cell_human_title = Frame(self.frames[0], bg = c.BACKGROUND_COLOR_CELL_EMPTY, width =10, height=10)
         cell_human_title.grid(row=5, column=0, padx=5,pady=5)
-        t_human_title = Label(master=cell_human_title, text="Score",bg=c.BACKGROUND_COLOR_CELL_EMPTY,justify=CENTER, font=(c.FONT, 20), width=3, height=1)
+        t_human_title = Label(master=cell_human_title, text="Score",bg=c.BACKGROUND_COLOR_CELL_EMPTY,justify=CENTER, font=(c.FONT, 20), width=7, height=1)
         t_human_title.grid()
         cell_human_num = Frame(self.frames[0], bg = c.BACKGROUND_COLOR_CELL_EMPTY, width =10, height=10)
         cell_human_num.grid(row=5, column=1, padx=5,pady=5)
@@ -84,7 +89,7 @@ class puzzle():
 
         cell_ai_title = Frame(self.frames[1], bg = c.BACKGROUND_COLOR_CELL_EMPTY, width =10, height=10)
         cell_ai_title.grid(row=5, column=0, padx=5,pady=5)
-        t_ai_title = Label(master=cell_ai_title, text="Score",bg=c.BACKGROUND_COLOR_CELL_EMPTY,justify=CENTER, font=(c.FONT, 20), width=3, height=1)
+        t_ai_title = Label(master=cell_ai_title, text="Score",bg=c.BACKGROUND_COLOR_CELL_EMPTY,justify=CENTER, font=(c.FONT, 20), width=7, height=1)
         t_ai_title.grid()
         cell_ai_num = Frame(self.frames[1], bg = c.BACKGROUND_COLOR_CELL_EMPTY, width =10, height=10)
         cell_ai_num.grid(row=5, column=1, padx=5,pady=5)
@@ -149,7 +154,7 @@ class puzzle():
             self.score = self.score + self.plusscore
         
         if True:
-            print("done")
+            #print("done")
             matrix_temp = logic.add_two(matrix_temp)
             self.matrix[self.order % 2] = matrix_temp
             # record last move
@@ -160,12 +165,40 @@ class puzzle():
 
             done = False
 
+    def CheckIfError(self, GameState):
+        err = False
+        move = -1
+        error = [True, True, True, True]
+        for k in range(4):
+            for i in range(4):
+                for j in range(4):
+                    if(ErrorMat[k][i][j] != GameState[i][j]):
+                        error[k] = False
+
+        if error[0]:
+            move = 2
+        
+        if error[1]:
+            move = 0
+
+        if error[2]:
+            move = 0
+
+        if error[3]:
+            move = 2
+
+        return move
+
         
 
     def AIAction(self):
         GameState = np.array(self.matrix[self.order % 2])
 
-        BestAction = self.AI.Act(GameState) # 현재 상태로 행동을 선택
+        move = self.CheckIfError(GameState)
+        if(move != -1):
+            BestAction = move
+        else:
+            BestAction = self.AI.Act(GameState) # 현재 상태로 행동을 선택
 
         if(BestAction == 0):
             matrix_temp, self.plusscore, done = logic.up(GameState)
@@ -184,7 +217,7 @@ class puzzle():
         self.matrix[self.order % 2] = matrix_temp
         self.update_grid_cells()
 
-        print("AI")
+        #print("AI")
         self.order = self.order + 1
 
     def generate_next(self):

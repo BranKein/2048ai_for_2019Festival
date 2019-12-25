@@ -293,9 +293,9 @@ def get_score_s(grid):
 
 
 def move_action(matt, move):
-    print(matt)
+    #print(matt)
     mat_copy = copy.deepcopy(matt)
-    print(mat_copy)
+    #print(mat_copy)
 
     if move == 0:
         mat = transpose(mat_copy)
@@ -376,7 +376,7 @@ def main():
     game.add_two()
     game.add_two()
     E = ExpectMax()
-    print(game.game_state())
+    #print(game.game_state())
     while game.game_state() == 'not over':
         done = E.get_move(game)
         # print(done)
@@ -407,6 +407,6 @@ if __name__ == '__main__':
             m[maxscore] += 1
         else:
             m[maxscore] = 1
-        print(m)
-    print(m)
+        #print(m)
+    #print(m)
 

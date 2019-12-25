@@ -157,7 +157,7 @@ class Agent:
                 self.ExpReplay = ExpReplay(ac.ExpReplay_CAPACITY)
                 self.steps = 0
                 self.epsilon = ac.MAX_EPSILON
-                self.epsilon_game = 0
+                self.epsilon_game = 0.4
         # ============================================
         # 학습 모델 로드
         def Load(self, num):
