@@ -147,18 +147,24 @@ class puzzle():
         matrix_temp = self.matrix[0]
         done = False
 
-        if(event.char == 'w'):
+        moved = False
+
+        if(event.char == 'w' and self.checkifcanmove(logic.up(matrix_temp)[0], matrix_temp)):
             matrix_temp, self.plusscore, done = logic.up(matrix_temp)
             self.score = self.score + self.plusscore
-        elif(event.char == 'a'):
+            moved = True
+        elif(event.char == 'a' and self.checkifcanmove(logic.left(matrix_temp)[0], matrix_temp)):
             matrix_temp, self.plusscore, done = logic.left(matrix_temp)
             self.score = self.score + self.plusscore
-        elif(event.char == 'd'):
+            moved = True
+        elif(event.char == 'd' and self.checkifcanmove(logic.right(matrix_temp)[0], matrix_temp)):
             matrix_temp, self.plusscore, done = logic.right(matrix_temp)
             self.score = self.score + self.plusscore
-        elif(event.char == 's'):
+            moved = True
+        elif(event.char == 's' and self.checkifcanmove(logic.down(matrix_temp)[0], matrix_temp)):
             matrix_temp, self.plusscore, done = logic.down(matrix_temp)
             self.score = self.score + self.plusscore
+            moved = True
 
         if(logic.game_state(self.matrix[0]) == 'lose'):
             self.GameSet = True
@@ -166,15 +172,16 @@ class puzzle():
         if(logic.game_state(self.matrix[0]) == 'not over' and logic.game_state(self.matrix[1]) == 'lose'):
             self.Win = True
         
-        if True and (logic.game_state(self.matrix[0]) == 'not over') and not self.Win:
+        if (logic.game_state(self.matrix[0]) == 'not over') and not self.Win and done and moved:
             print("done")
+            print(matrix_temp)
             matrix_temp = logic.add_two(matrix_temp)
             self.matrix[0] = matrix_temp
             # record last move
             self.update_grid_cells()
 
             self.order = self.order + 1 
-            self.AIAction()
+            self.AIAction(0.2)
 
             done = False
 
@@ -182,18 +189,37 @@ class puzzle():
         if self.GameSet and not self.Win:
             self.Finish()
 
+    def checkifcanmove(self, grid, ori):
+        grid = np.array(grid)
+        ori = np.array(ori)
+
+        grid = grid.flatten()
+        ori = ori.flatten()
+
+        same = True
+
+        for i in range(16):
+            if(grid[i] != ori[i]):
+                same = False
+
+        return not same
+
+        
+
     def Finish(self):
         while True:
             if logic.game_state(self.matrix[1]) == 'not over':
-                time.sleep(0.5)
-                self.AIAction()
+                
+                self.AIAction(0)
             else:
                 print("It is my Best!")
+                return
         
 
-    def AIAction(self):
+    def AIAction(self, delay):
         GameState = np.array(self.matrix[1])
         print("Thinking...")
+        time.sleep(delay)
 
         BestAction = ThePCGeek_2048.getBestMove(GameState.flatten())
 
@@ -252,5 +278,3 @@ class puzzle():
             return True
         else:
             return False
-
-
