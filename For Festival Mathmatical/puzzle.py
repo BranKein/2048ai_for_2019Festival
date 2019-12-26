@@ -141,8 +141,6 @@ class puzzle():
                         fg=c.CELL_COLOR_DICT[2])
 
     def key_down(self, event):
-        
-        key = repr(event.char)
 
         matrix_temp = self.matrix[0]
         done = False
@@ -171,8 +169,9 @@ class puzzle():
 
         if(logic.game_state(self.matrix[0]) == 'not over' and logic.game_state(self.matrix[1]) == 'lose'):
             self.Win = True
+            
         
-        if (logic.game_state(self.matrix[0]) == 'not over') and not self.Win and done and moved:
+        if (logic.game_state(self.matrix[0]) == 'not over') and done and moved:
             print("done")
             print(matrix_temp)
             matrix_temp = logic.add_two(matrix_temp)
@@ -180,14 +179,19 @@ class puzzle():
             # record last move
             self.update_grid_cells()
 
-            self.order = self.order + 1 
-            self.AIAction(0.2)
+            self.order = self.order + 1
+            
+            if not self.Win:
+                self.AIAction(0.2)
 
             done = False
 
 
         if self.GameSet and not self.Win:
             self.Finish()
+
+        if self.GameSet and self.Win:
+            self.RootFrame.quit()
 
     def checkifcanmove(self, grid, ori):
         grid = np.array(grid)
@@ -251,18 +255,6 @@ class puzzle():
             index = (self.gen(), self.gen())
         self.matrix[index[0]][index[1]] = 2
 
-    def Lose(self):
-        if logic.game_state(self.matrix) == 'lose':
-            self.grid_cells[1][4].configure(
-                    text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
-            self.grid_cells[2][4].configure(
-                    text="Lose!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
-    def Win(self):
-        if logic.game_state(self.matrix) == 'win':
-            self.grid_cells[1][4].configure(
-                    text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
-            self.grid_cells[2][4].configure(
-                    text="Win!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
 
     def GetScore(self):
         return self.score
