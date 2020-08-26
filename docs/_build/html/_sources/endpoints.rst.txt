@@ -1,0 +1,13 @@
+endpoints!
+==================================
+
+.. automodule:: endpoints.article
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+   Modules
+
+   -------
+
+  .. automodule:: endpoints.article

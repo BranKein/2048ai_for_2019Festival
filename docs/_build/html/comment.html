@@ -1,0 +1,466 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Comment api &mdash; gistory-be 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Board api" href="board.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> gistory-be
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="article.html">Article api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="board.html">Board api</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Comment api</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gistory-be</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Comment api</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/comment.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="comment-api">
+<h1>Comment api<a class="headerlink" href="#comment-api" title="Permalink to this headline">¶</a></h1>
+<dl class="get">
+<dt id="get--article-(int-article_id)-comment">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/article/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">article_id</em><span class="sig-paren">)</span><code class="sig-name descname">/comment</code><a class="headerlink" href="#get--article-(int-article_id)-comment" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>게시물에 있는 답글들을 반환함</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramaters</dt>
+<dd class="field-odd"><p><strong>article_id</strong></p>
+<ul class="simple">
+<li><p>name: article_id</p></li>
+<li><p>in: path</p></li>
+<li><p>type: integer</p></li>
+<li><p>description: 게시물 ID</p></li>
+<li><p>required: true</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/article/(int:article_id)/comment</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">api.gistory.me</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>HTTP/1.1 200 OK
+Vary: Accept
+Content-Type: application/json
+
+    { // Not Yet
+        &quot;board&quot;: &quot;notice&quot;,
+        &quot;content&quot;: &quot;testbody&quot;,
+        &quot;id&quot;: 1,
+        &quot;is_notify&quot;: 0,
+        &quot;is_visible&quot;: 1,
+        &quot;last_modified&quot;: &quot;Sat, 22 Aug 2020 04:21:33 GMT&quot;,
+        &quot;reg_date&quot;: &quot;Fri, 14 Aug 2020 00:06:35 GMT&quot;,
+        &quot;submitter&quot;: &quot;7493683866F544D5907E93637D6B65A3&quot;,
+        &quot;title&quot;: &quot;testarticle&quot;,
+        &quot;views&quot;: 0
+    }
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Response Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>404: 가져오려는 답글이 존재하지 않음</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>information of article</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="delete">
+<dt id="delete--article-(int-article_id)-(int-comment_id)">
+<code class="sig-name descname">DELETE </code><code class="sig-name descname">/article/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">article_id</em><span class="sig-paren">)</span><code class="sig-name descname">/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">comment_id</em><span class="sig-paren">)</span><a class="headerlink" href="#delete--article-(int-article_id)-(int-comment_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>답글 삭제</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Paramaters</dt>
+<dd class="field-odd"><p><strong>article_id</strong></p>
+<ul class="simple">
+<li><p>name: article_id</p></li>
+<li><p>in: path</p></li>
+<li><p>type: integer</p></li>
+<li><p>description: 게시물 ID</p></li>
+<li><p>required: true</p></li>
+</ul>
+<p><strong>comment_id</strong></p>
+<ul class="simple">
+<li><p>name: comment_id</p></li>
+<li><p>in: path</p></li>
+<li><p>type: integer</p></li>
+<li><p>description: 댓글 ID</p></li>
+<li><p>required: true</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">DELETE</span> <span class="nn">/comment/(int:article_id)/(int:comment_id)</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">api.gistory.me</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Response Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>404: 삭제하려는 답글이 존재하지 않음</p></li>
+<li><p>500: 알 수 없는 오류 발생</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="put">
+<dt id="put--article-(int-article_id)-(int-comment_id)">
+<code class="sig-name descname">PUT </code><code class="sig-name descname">/article/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">article_id</em><span class="sig-paren">)</span><code class="sig-name descname">/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">comment_id</em><span class="sig-paren">)</span><a class="headerlink" href="#put--article-(int-article_id)-(int-comment_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>답글 수정</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Paramaters</dt>
+<dd class="field-odd"><p><strong>article_id</strong></p>
+<ul class="simple">
+<li><p>name: article_id</p></li>
+<li><p>in: path</p></li>
+<li><p>type: integer</p></li>
+<li><p>description: 게시물 ID</p></li>
+<li><p>required: true</p></li>
+</ul>
+<p><strong>comment_id</strong></p>
+<ul class="simple">
+<li><p>name: comment_id</p></li>
+<li><p>in: path</p></li>
+<li><p>type: integer</p></li>
+<li><p>description: 댓글 ID</p></li>
+<li><p>required: true</p></li>
+</ul>
+<p><strong>content</strong></p>
+<ul class="simple">
+<li><p>name: content</p></li>
+<li><p>in: query</p></li>
+<li><p>type: string</p></li>
+<li><p>description: 수정할 게시물의 새 본문</p></li>
+<li><p>required: false</p></li>
+</ul>
+<p><strong>is_secret</strong></p>
+<ul class="simple">
+<li><p>name: is_secret</p></li>
+<li><p>in: query</p></li>
+<li><p>type: boolean</p></li>
+<li><p>description: 수정할 게시물의 secret 여부</p></li>
+<li><p>required: false</p></li>
+</ul>
+<p><strong>is_visible</strong></p>
+<ul class="simple">
+<li><p>name: is_visible</p></li>
+<li><p>in: query</p></li>
+<li><p>type: boolean</p></li>
+<li><p>description: 수정할 게시물의 visible 여부</p></li>
+<li><p>required: false</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>PUT /article/(int:article_id)/(int:comment_id) HTTP/1.1
+Host: api.gistory.me
+Accept: application/json
+Content-Type: application/json
+
+    {
+        &quot;content&quot;: &quot;New content&quot;,
+        &quot;is_secret&quot;: False,
+        &quot;is_visible&quot;: True
+    }
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Response Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>200: 답글 수정 정상 완료</p></li>
+<li><p>404: 수정할 답글이 존재하지 않음</p></li>
+<li><p>500: 알 수 없는 오류 발생</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--article-(int-article_id)-comment">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/article/</code><span class="sig-paren">(</span><em class="property">int: </em><em class="sig-param">article_id</em><span class="sig-paren">)</span><code class="sig-name descname">/comment</code><a class="headerlink" href="#post--article-(int-article_id)-comment" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>새로운 답글 작성</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Paramaters</dt>
+<dd class="field-odd"><p><strong>article_id</strong></p>
+<ul class="simple">
+<li><p>name: article_id</p></li>
+<li><p>in: path</p></li>
+<li><p>type: integer</p></li>
+<li><p>description: 답글을 달 게시물의 ID</p></li>
+<li><p>required: true</p></li>
+</ul>
+<p><strong>content</strong></p>
+<ul class="simple">
+<li><p>name: content</p></li>
+<li><p>in: query</p></li>
+<li><p>type: string</p></li>
+<li><p>description: 답글의 본문</p></li>
+<li><p>required: true</p></li>
+</ul>
+<p><strong>is_secret</strong></p>
+<ul class="simple">
+<li><p>name: is_secret</p></li>
+<li><p>in: query</p></li>
+<li><p>type: boolean</p></li>
+<li><p>description: 답글의 secret 여부</p></li>
+<li><p>required: true</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>POST /comment/0 HTTP/1.1
+Host: api.gistory.me
+Content-Type: application/json
+
+    {
+        &quot;content&quot;: &quot;content&quot;,
+        &quot;is_secret&quot;: False
+    }
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Response Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>200: 답글 작성 성공</p></li>
+<li><p>400: 필요한 데이터가 오지 않음</p></li>
+<li><p>500: 알 수 없는 오류 발생</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="board.html" class="btn btn-neutral float-left" title="Board api" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, yeonhyuk
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

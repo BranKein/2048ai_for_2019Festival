@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Board api &mdash; gistory-be 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Comment api" href="comment.html" />
+    <link rel="prev" title="Article api" href="article.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> gistory-be
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="article.html">Article api</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Board api</a></li>
+<li class="toctree-l1"><a class="reference internal" href="comment.html">Comment api</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">gistory-be</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Board api</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/board.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="board-api">
+<h1>Board api<a class="headerlink" href="#board-api" title="Permalink to this headline">¶</a></h1>
+<dl class="get">
+<dt id="get--board-(string-board_id)">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/board/</code><span class="sig-paren">(</span><em class="property">string: </em><em class="sig-param">board_id</em><span class="sig-paren">)</span><a class="headerlink" href="#get--board-(string-board_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>게시판의 글 목록을 반환함</strong></p>
+<dl class="field-list">
+<dt class="field-odd">Paramaters</dt>
+<dd class="field-odd"><p><strong>board_id</strong></p>
+<ul class="simple">
+<li><p>name: board_id</p></li>
+<li><p>in: path</p></li>
+<li><p>type: string</p></li>
+<li><p>description: 게시판 ID</p></li>
+<li><p>required: true</p></li>
+</ul>
+<p><strong>start_idx</strong></p>
+<ul class="simple">
+<li><p>name: start_idx</p></li>
+<li><p>in: query</p></li>
+<li><p>type: integer</p></li>
+<li><p>default: 0</p></li>
+<li><p>description: 가져올 글의 [start_idx, end_idx] 중 start_idx.</p></li>
+<li><p>required: false</p></li>
+</ul>
+<p><strong>end_idx</strong></p>
+<ul class="simple">
+<li><p>name: end_idx</p></li>
+<li><p>in: query</p></li>
+<li><p>type: integer</p></li>
+<li><p>default: 20</p></li>
+<li><p>description: 가져올 글의 [start_idx, end_idx] 중 end_idx.</p></li>
+<li><p>required: false</p></li>
+</ul>
+<p><strong>sort_type</strong></p>
+<ul>
+<li><p>name: sort_type</p></li>
+<li><p>in: query</p></li>
+<li><p>type: string</p></li>
+<li><p>default: id_desc</p></li>
+<li><p>description</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>정렬 방식, 아래 methods를 사용할 수 있음</p></li>
+<li><p>id_asc</p></li>
+<li><p>id_desc</p></li>
+<li><p>title_asc</p></li>
+<li><p>title_desc</p></li>
+<li><p>views_asc</p></li>
+<li><p>views_desc</p></li>
+<li><p>reg_date_asc</p></li>
+<li><p>reg_date_desc</p></li>
+<li><p>last_modified_asc</p></li>
+<li><p>last_modified_desc</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>required: false</p></li>
+</ul>
+<p><strong>include_notifications</strong></p>
+<ul class="simple">
+<li><p>name: include_notifications</p></li>
+<li><p>in: query</p></li>
+<li><p>type: boolean</p></li>
+<li><p>default: true</p></li>
+<li><p>description: 공지를 포함할 지 유무. 포함 시 모든 request에 공지가 포함되며, 공지 전체 + (end_idx - start_idx) 길이의 article list가 반환됨.</p></li>
+<li><p>required: false</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example request</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/board/question</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">api.gistory.me</span>
+<span class="na">Accept</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+    <span class="p">{</span>
+        <span class="nt">&quot;start_idx&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="nt">&quot;end_idx&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="nt">&quot;include_notification&quot;</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Example response</strong>:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Vary</span><span class="o">:</span> <span class="l">Accept</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+    <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="nt">&quot;is_notify&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;last_modified&quot;</span><span class="p">:</span> <span class="s2">&quot;Sat, 22 Aug 2020 04:21:33 GMT&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;reg_date&quot;</span><span class="p">:</span> <span class="s2">&quot;Mon, 17 Aug 2020 01:59:48 GMT&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;Blah&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;submitter&quot;</span><span class="p">:</span> <span class="s2">&quot;7493683866F544D5907E93637D6B65A3&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;질문게시판 테스트제목3&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;views&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="nt">&quot;is_notify&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;last_modified&quot;</span><span class="p">:</span> <span class="s2">&quot;Sat, 22 Aug 2020 04:21:33 GMT&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;reg_date&quot;</span><span class="p">:</span> <span class="s2">&quot;Mon, 17 Aug 2020 01:59:55 GMT&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;Blah&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;submitter&quot;</span><span class="p">:</span> <span class="s2">&quot;7493683866F544D5907E93637D6B65A3&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;질문게시판 테스트제목4&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;views&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+            <span class="nt">&quot;is_notify&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nt">&quot;last_modified&quot;</span><span class="p">:</span> <span class="s2">&quot;Sat, 22 Aug 2020 04:21:33 GMT&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;reg_date&quot;</span><span class="p">:</span> <span class="s2">&quot;Fri, 21 Aug 2020 20:13:46 GMT&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;Blah&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;submitter&quot;</span><span class="p">:</span> <span class="s2">&quot;7493683866F544D5907E93637D6B65A3&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;ㅇㄷㅇㄷㅇㄷ&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;views&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">resheader Content-Type</dt>
+<dd class="field-odd"><p>application/json</p>
+</dd>
+<dt class="field-even">status</dt>
+<dd class="field-even"><ul class="simple">
+<li><p>200: 성공적으로 요청을 수행함</p></li>
+<li><p>default: 요청이 수행되지 않음</p></li>
+</ul>
+</dd>
+<dt class="field-odd">returns</dt>
+<dd class="field-odd"><p>Article 리스트</p>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="comment.html" class="btn btn-neutral float-right" title="Comment api" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="article.html" class="btn btn-neutral float-left" title="Article api" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, yeonhyuk
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
